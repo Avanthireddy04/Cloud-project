@@ -173,7 +173,7 @@ Since the project does not use API Gateway, these are logical internal endpoints
 
 
 
-### ⚠️Limitations
+### ⚠️ Limitations
 
 1️⃣ Resume Format Limitations
 - The system performs best with PDF and DOCX files; resumes containing images, scanned pages, or non-selectable text may extract poorly or require OCR.
@@ -199,8 +199,6 @@ Since the project does not use API Gateway, these are logical internal endpoints
 - Even though BERT is powerful, it may still miss certain domain-specific skills or unconventional writing patterns.
 - Costs can increase with heavy usage, especially for ECS Fargate and DynamoDB.
 
-7️⃣ Semantic Gaps
-- Even though BERT is powerful, it may still miss certain domain-specific skills or unconventional writing patterns.
 
 ### 📌 Permissions Included (IAM Roles & Policies)
 
