@@ -15,9 +15,9 @@
 
 
 ### 🎯 Project Overview
-The Resume Matching System is a cloud-based application deployed on AWS that automatically analyzes and ranks resumes against job descriptions using NLP and machine learning.
+This Project Culling of Resumes using NLP Techniques hosted on AWS in simple is,(Resume Matching System) it is a cloud-based application deployed on AWS that automatically analyzes and ranks resumes against job descriptions using NLP and machine learning.
 
-- 📄 Resumes and job descriptions are uploaded to S3 and automatically processed by AWS Lambda.
+  - 📄 Resumes and job descriptions are uploaded to S3 and automatically processed by AWS Lambda.
   - 🔍 AWS Lambda functions to extract text, clean the data, and store structured information in Amazon DynamoDB.
   - 🧮 The matching engine in ECS Fargate performs cosine similarity search between resumes and job descriptions.
   - 📊 Ranked candidate results are returned through the Streamlit app via the Application Load Balancer.
@@ -65,9 +65,9 @@ Since the project does not use API Gateway, these are logical internal endpoints
 
 - /match results table/{job_id} -	  Displays ranked resumes
 
-- /resumes table	-      Retrieves processed resume data
+- /resumes table/	-      Retrieves processed resume data
 
-- jobs table   -   	Retrieves job description data
+- /jobs table/  -   	Retrieves job description data
 
 ### 🔄 Data Flow
 
