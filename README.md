@@ -16,6 +16,13 @@
 
 ### 🎯 Project Overview
 This Project Culling of Resumes using NLP Techniques hosted on AWS in simple is,(Resume Matching System) it is a cloud-based application deployed on AWS that automatically analyzes and ranks resumes against job descriptions using NLP and machine learning.
+ It is designed to help recruiters automatically identify which candidates best match a given job description. Instead of manually reading through each resume, the system uses Natural Language Processing (NLP) and Machine Learning to read, analyze, and compare resumes with job requirements.
+
+The process starts when a user uploads resumes and job descriptions through a web interface. These files are stored in Amazon S3. Whenever a document is uploaded, AWS Lambda automatically processes it by extracting the text, cleaning it, and converting it into a structured format. The cleaned data is then stored in Amazon DynamoDB.
+
+The matching engine is hosted in a Streamlit application running on Amazon ECS Fargate. This engine takes the processed resume and job description text and converts them into vector embeddings using TF-IDF and BERT, which help the system understand both keyword importance and the deeper meaning behind the text. The system then calculates a similarity score for each resume using cosine similarity. The higher the score, the better the resume matches the job description.
+
+Finally, the system displays the ranked results back to the user through the Streamlit interface. Recruiters can see which candidates best fit the job, along with details extracted from each resume. This automation reduces manual effort, improves accuracy, and speeds up the hiring process.
 
   - 📄 Resumes and job descriptions are uploaded to S3 and automatically processed by AWS Lambda.
   - 🔍 AWS Lambda functions to extract text, clean the data, and store structured information in Amazon DynamoDB.
@@ -26,7 +33,7 @@ This Project Culling of Resumes using NLP Techniques hosted on AWS in simple is,
 ### 🏗️ Architecture
 
 
-This project follows a serverless + containerized microservices architecture.
+This project follows a serverless architecture.
 Resumes and job descriptions are uploaded through a Streamlit UI running on ECS Fargate, processed through Lambda, stored in DynamoDB, and matched using ML models within the ECS application.
 
 Core Components
