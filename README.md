@@ -17,23 +17,27 @@
 ### 🎯 Project Overview
 This Project Culling of Resumes using NLP Techniques hosted on AWS in simple is,(Resume Matching System) it is a cloud-based application deployed on AWS that automatically analyzes and ranks resumes against job descriptions using NLP and machine learning.
  It is designed to help recruiters automatically identify which candidates best match a given job description. Instead of manually reading through each resume, the system uses Natural Language Processing (NLP) and Machine Learning to read, analyze, and compare resumes with job requirements.
+ 
+it allows users to upload resumes and job descriptions, process them in the backend, and view matching results through a web interface.
 
-The process starts when a user uploads resumes and job descriptions through a web interface. These files are stored in Amazon S3. Whenever a document is uploaded, AWS Lambda automatically processes it by extracting the text, cleaning it, and converting it into a structured format. The cleaned data is then stored in Amazon DynamoDB.
+The goal of this project is to understand how NLP concepts can be integrated with AWS services to build a scalable, real-world application.
 
-The matching engine is hosted in a Streamlit application running on Amazon ECS Fargate. This engine takes the processed resume and job description text and converts them into vector embeddings using TF-IDF and BERT, which help the system understand both keyword importance and the deeper meaning behind the text. The system then calculates a similarity score for each resume using cosine similarity. The higher the score, the better the resume matches the job description.
+🎯 Objectives
 
-Finally, the system displays the ranked results back to the user through the Streamlit interface. Recruiters can see which candidates best fit the job, along with details extracted from each resume. This automation reduces manual effort, improves accuracy, and speeds up the hiring process.
+- Automate resume and job description matching
 
-  - 📄 Resumes and job descriptions are uploaded to S3 and automatically processed by AWS Lambda.
-  - 🔍 AWS Lambda functions to extract text, clean the data, and store structured information in Amazon DynamoDB.
-  - 🧮 The matching engine in ECS Fargate performs cosine similarity search between resumes and job descriptions.
-  - 📊 Ranked candidate results are returned through the Streamlit app via the Application Load Balancer.
+- Apply basic NLP techniques for text processing
+
+- Use AWS serverless and container services
+
+- Build and deploy a cloud-based application
+
 
 
 ### 🏗️ Architecture
 
 
-This project follows a serverless architecture.
+This project follows a serverless and Microservices architecture.
 Resumes and job descriptions are uploaded through a Streamlit UI running on ECS Fargate, processed through Lambda, stored in DynamoDB, and matched using ML models within the ECS application.
 
 Core Components
@@ -51,12 +55,22 @@ Core Components
 - Application Load Balancer → Provides public access
 
 - CloudWatch → Monitors logs and application performance
+  
+- Eventbridge → For Deployment automation
+  
+- IAM → Manages users and permissions.
 
 ### 🏗️Architecture Diagram
 
 ![cloud architecture diagram](https://github.com/user-attachments/assets/f21c24a5-6001-45c1-a746-eb2692c62b16)
 
+The system is divided into three main layers:
 
+- Frontend Layer – User interface for uploading files and viewing results
+
+- Backend Layer – Handles file processing and data storage
+
+- Processing Layer – Performs NLP and similarity calculations
 
 ## 🔌 API Endpoints (Internal Routes)
 
@@ -97,6 +111,11 @@ Since the project does not use API Gateway, these are logical internal endpoints
 
 ### Frontend & Application Layer:
 1. Amazon ECS with AWS Fargate: The Streamlit-based web application runs as containerized tasks in Amazon Elastic Container Service using Fargate serverless compute. This eliminates the need to manage underlying servers while providing automatic scaling based on demand.
+- Builds Streamlit user interface
+
+- Packages application using Docker
+
+- Pushes Docker image to Amazon ECR
   
 2. Application Load Balancer (ALB): An internet-facing Application Load Balancer distributes incoming HTTP traffic across multiple ECS tasks running in different availability zones, ensuring high availability and fault tolerance.
 
@@ -116,10 +135,17 @@ Since the project does not use API Gateway, these are logical internal endpoints
  
 5. Cosine Similarity – For resume–job matching scores
 
+### Cloud deployment
+- Deploys application on ECS (Fargate)
+
+- Configures networking and load balancer
+
+- Ensures secure and public access to the app
+
 
 ### Container Registry
 1. Amazon ECR (Elastic Container Registry): The Docker container image for the application is stored in a private ECR repository, enabling version control and secure image distribution to ECS tasks.
-
+Docker, Amazon ECR, and Amazon ECS work together to deploy our application on AWS. Docker is used to package the Streamlit frontend application along with its required libraries and environment into a container, ensuring the app runs the same way everywhere. Amazon ECR acts as a secure storage location where this Docker container image is uploaded and maintained. Amazon ECS (using Fargate) then pulls the container image from ECR and runs it as a live application without requiring us to manage servers. In simple terms, Docker builds the application, ECR stores it, and ECS runs it so users can access the application through a web browser.
 
 
 ### 🔒 Security
@@ -171,6 +197,7 @@ Since the project does not use API Gateway, these are logical internal endpoints
 🔹 Amazon CloudWatch
 - Monitors ECS tasks, memory, CPU, error logs, and Lambda failures.
 - Alerts are set for abnormal behavior such as repeated errors or unusual traffic.
+- ECS health checks and scaling.
   
 🔹 S3 Access Logs
 - Tracks object-level access to detect any unauthorized activity.
